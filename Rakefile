@@ -5,12 +5,13 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "gemfeed"
-    gem.summary = %Q{TODO: one-line summary of your gem}
-    gem.description = %Q{TODO: longer description of your gem}
+    gem.summary = %Q{A gem for managing gemfeed subscriptions}
+    gem.description = %Q{This gem provides automatic post install and uninstall hooks to allow you to subscribe to gems with gemfeed. It also provides a command that allows you to automatically install to all gems that are currently installed.}
     gem.email = "aubreyholland@gmail.com"
     gem.homepage = "http://github.com/aub/gemfeed"
     gem.authors = ["Aubrey Holland"]
     gem.add_development_dependency "rspec"
+    gem.files = Dir['lib/**/*.rb']
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
 rescue LoadError
