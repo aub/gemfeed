@@ -1,6 +1,6 @@
 module Gemfeed
 
-  GEMFEED_URL = 'http://localhost:3000'
+  GEMFEED_URL = 'http://gemfeed.com'
 
   class GemfeedLoginError < StandardError; end;
 
@@ -61,23 +61,27 @@ module Gemfeed
   end
 
   def self.make_request(url, req, gem_name, &block)
-    res = Net::HTTP.new(url.host, url.port).start { |http| http.request(req) }
-    case res
-    when Net::HTTPSuccess
-      block.call(res.body)
-    when Net::HTTPUnauthorized:
-      print_unauthorized_error
-    when Net::HTTPClientError:
-      doc = REXML::Document.new(res.body)
-      doc.elements.each('errors/error') do |error| 
-        if error.text == 'User has already been taken'
-          puts "!!! You are already subscribed to #{gem_name} on gemfeed."
-        elsif error.text == 'Package can\'t be blank'
-          puts "!!! Gemfeed cannot find the gem #{gem_name}"
+    begin
+      res = Net::HTTP.new(url.host, url.port).start { |http| http.request(req) }
+      case res
+      when Net::HTTPSuccess
+        block.call(res.body)
+      when Net::HTTPUnauthorized:
+        print_unauthorized_error
+      when Net::HTTPClientError:
+        doc = REXML::Document.new(res.body)
+        doc.elements.each('errors/error') do |error| 
+          if error.text == 'User has already been taken'
+            puts "!!! You are already subscribed to #{gem_name} on gemfeed."
+          elsif error.text == 'Package can\'t be blank'
+            puts "!!! Gemfeed cannot find the gem #{gem_name}"
+          end
         end
+      else
+        puts '!!! There was a server error while subscribing you to this gem on gemfeed.'
       end
-    else
-      puts '!!! There was a server error while subscribing you to this gem on gemfeed.'
+    rescue Errno::ECONNREFUSED
+      puts '!!! There was an error when connecting to the server.'
     end
   end
 
