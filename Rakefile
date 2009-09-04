@@ -12,6 +12,21 @@ begin
     gem.authors = ["Aubrey Holland"]
     gem.add_development_dependency "rspec"
     gem.files = Dir['lib/**/*.rb']
+    gem.post_install_message = <<-POST_INSTALL_MESSAGE
+#{'*' * 50}
+
+  The gemfeed gem is now installed. You need to configure it by
+  editing your ~/.gemrc file and adding lines like:
+
+  gemfeed_login: {your gemfeed login}
+  gemfeed_password: {your gemfeed password, if you have one}
+
+  Now, you can use "gem gemfeed" to subscribe to all existing gems, and
+  subscriptions will automatically be created and removed as gems are
+  installed and removed.
+
+#{'*' * 50}
+POST_INSTALL_MESSAGE
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
 rescue LoadError
