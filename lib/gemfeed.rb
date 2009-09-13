@@ -97,3 +97,4 @@ module Gemfeed
     end
   end
 end
+

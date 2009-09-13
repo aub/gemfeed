@@ -53,10 +53,17 @@ task :spec => :check_dependencies
 
 task :default => :spec
 
-require 'rake/rdoctask'
+# Try to use hanna to create spiffier docs.
+begin
+  require 'hanna/rdoctask'
+rescue LoadError
+  require 'rake/rdoctask'
+end
+
 Rake::RDocTask.new do |rdoc|
-  if File.exist?('VERSION')
-    version = File.read('VERSION')
+  if File.exist?('VERSION.yml')
+    config = YAML.load(File.read('VERSION.yml'))
+    version = "#{config[:major]}.#{config[:minor]}.#{config[:patch]}"
   else
     version = ""
   end
@@ -65,5 +72,6 @@ Rake::RDocTask.new do |rdoc|
   rdoc.title = "gemfeed #{version}"
   rdoc.rdoc_files.include('README*')
   rdoc.rdoc_files.include('lib/**/*.rb')
+  rdoc.options << '--webcvs=http://github.com/aub/gemfeed/tree/master/'
 end
 
