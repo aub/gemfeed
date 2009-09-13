@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Aubrey Holland"]
-  s.date = %q{2009-09-04}
+  s.date = %q{2009-09-13}
   s.description = %q{This gem provides automatic post install and uninstall hooks to allow you to subscribe to gems with gemfeed. It also provides a command that allows you to automatically install to all gems that are currently installed.}
   s.email = %q{aubreyholland@gmail.com}
   s.extra_rdoc_files = [
@@ -38,6 +38,7 @@ Gem::Specification.new do |s|
 }
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
+  s.rubyforge_project = %q{gemfeed}
   s.rubygems_version = %q{1.3.3}
   s.summary = %q{A gem for managing gemfeed subscriptions}
   s.test_files = [

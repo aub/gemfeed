@@ -12,6 +12,7 @@ begin
     gem.authors = ["Aubrey Holland"]
     gem.add_development_dependency "rspec"
     gem.files = Dir['lib/**/*.rb']
+    gem.rubyforge_project = 'gemfeed'
     gem.post_install_message = <<-POST_INSTALL_MESSAGE
 #{'*' * 50}
 
@@ -28,6 +29,9 @@ begin
 #{'*' * 50}
 POST_INSTALL_MESSAGE
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
+  end
+  Jeweler::RubyforgeTasks.new do |rubyforge|
+    rubyforge.doc_task = 'rdoc'
   end
 rescue LoadError
   puts "Jeweler (or a dependency) not available. Install it with: sudo gem install jeweler"
@@ -62,3 +66,4 @@ Rake::RDocTask.new do |rdoc|
   rdoc.rdoc_files.include('README*')
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
+

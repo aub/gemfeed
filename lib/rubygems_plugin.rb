@@ -4,8 +4,6 @@ require 'rubygems/command_manager'
 require 'uri'
 require 'rexml/document'
 
-require 'ruby-debug'
-
 Gem::CommandManager.instance.register_command :gemfeed
 
 Gem.post_install do |installer|
